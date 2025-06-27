@@ -32,29 +32,6 @@
 
 ---
 
-## 🧩 Folder Structure (App Router)
-
-vibe-it/
-├── app/
-│ ├── layout.tsx
-│ ├── page.tsx
-│ ├── dashboard/
-│ ├── create/
-│ └── api/
-├── components/
-├── lib/
-├── styles/
-├── public/
-├── .env.local
-├── next.config.js
-└── tailwind.config.ts
-
-yaml
-Copy
-Edit
-
----
-
 ## 📦 Getting Started
 
 ```bash
@@ -63,7 +40,7 @@ git clone https://github.com/yourusername/vibe-it.git
 cd vibe-it
 
 # Install dependencies
-npm install
+bun install
 
 # Set up environment variables
 cp .env.example .env.local
