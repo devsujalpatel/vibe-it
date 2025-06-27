@@ -53,9 +53,6 @@ Then visit: http://localhost:3000
 🔑 Environment Variables
 Here's a sample .env.local:
 
-ini
-Copy
-Edit
 DATABASE_URL=your_database_url
 NEXTAUTH_SECRET=your_auth_secret
 NEXTAUTH_URL=http://localhost:3000
