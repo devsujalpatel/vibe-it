@@ -64,7 +64,6 @@ export const helloWorld = inngest.createFunction(
             ),
           }),
           handler: async ({ files }, { step, network }) => {
-
             const newFiles = await step?.run(
               "createOrUpdateFiles",
               async () => {
@@ -79,10 +78,33 @@ export const helloWorld = inngest.createFunction(
                 } catch (error) {
                   return "Error: " + error;
                 }
-              });
-              if(typeof newFiles === "object") {
-                network.state.data.files = newFiles
               }
+            );
+            if (typeof newFiles === "object") {
+              network.state.data.files = newFiles;
+            }
+          },
+        }),
+        createTool({
+          name: "readFiles",
+          description: "Read files from the sandbox",
+          parameters: z.object({
+            files: z.array(z.string()),
+          }),
+          handler: async ({ files }, { step }) => {
+            return await step?.run("readFiles", async () => {
+              try {
+                const sandbox = await getSandbox(sandboxId);
+                const contents = [];
+                for (const file of files) {
+                  const content = await sandbox.files.read(file);
+                  contents.push({ path: file, content });
+                }
+                return JSON.stringify(contents);
+              } catch (error) {
+                return "Error: " + error;
+              }
+            });
           },
         }),
       ],
