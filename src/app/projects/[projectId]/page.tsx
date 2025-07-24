@@ -1,6 +1,6 @@
 interface Props {
-  params: Promse<{
-    projectIdd: string;
+  params: Promise<{
+    projectId: string;
   }>;
 }
 
