@@ -141,7 +141,7 @@ export const helloWorld = inngest.createFunction(
       },
     });
 
-    const result = await network.run(event.data.email);
+    const result = await network.run(event.data.value);
 
     const sandboxUrl = await step.run("get-sandbox-url", async () => {
       const sandbox = await getSandbox(sandboxId);
