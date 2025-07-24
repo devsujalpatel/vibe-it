@@ -1,8 +1,14 @@
 import { Sandbox } from "@e2b/code-interpreter";
-import { gemini, createAgent, createTool } from "@inngest/agent-kit";
+import {
+  gemini,
+  createAgent,
+  createTool,
+  createNetwork,
+} from "@inngest/agent-kit";
 import { inngest } from "./client";
-import { getSandbox } from "./utils";
+import { getSandbox, lastAssistantTextMessageContent } from "./utils";
 import { z } from "zod";
+import { PROMPT } from "@/prompt";
 
 export const helloWorld = inngest.createFunction(
   { id: "hello-world" },
@@ -14,9 +20,9 @@ export const helloWorld = inngest.createFunction(
     });
 
     const codeAgent = createAgent({
-      name: "codeAgent",
-      system:
-        "You are an expert next.js developer. You write readable, maintable code. you write simple Next.js & React snippets.",
+      name: "code-agent",
+      description: "An exper coding agent",
+      system: PROMPT,
       model: gemini({ model: "gemini-2.0-flash" }),
       tools: [
         createTool({
@@ -108,11 +114,34 @@ export const helloWorld = inngest.createFunction(
           },
         }),
       ],
+      lifecycle: {
+        onResponse: async ({ result, network }) => {
+          const lastAssistantMessageText =
+            lastAssistantTextMessageContent(result);
+          if (lastAssistantMessageText && network) {
+            if (lastAssistantMessageText.includes("<task_summary>")) {
+              network.state.data.summary = lastAssistantMessageText;
+            }
+          }
+          return result;
+        },
+      },
     });
 
-    const { output } = await codeAgent.run(
-      `Write the following snippents: ${event.data.email}`
-    );
+    const network = createNetwork({
+      name: "coding-agent-network",
+      agents: [codeAgent],
+      maxIter: 15,
+      router: async ({ network }) => {
+        const summary = network.state.data.summary;
+        if (summary) {
+          return;
+        }
+        return codeAgent;
+      },
+    });
+
+    const result = await network.run(event.data.email);
 
     const sandboxUrl = await step.run("get-sandbox-url", async () => {
       const sandbox = await getSandbox(sandboxId);
@@ -120,6 +149,11 @@ export const helloWorld = inngest.createFunction(
       return `https://${host}`;
     });
 
-    return { output, sandboxUrl };
+    return {
+      url: sandboxUrl,
+      title: "Fragment",
+      files: result.state.data.files,
+      summary: result.state.data.summary,
+    };
   }
 );
