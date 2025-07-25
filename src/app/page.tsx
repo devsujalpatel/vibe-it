@@ -23,11 +23,14 @@ const Page = () => {
     })
   );
   return (
-    <div className="h-screen bg-neutral-950 text-white w-screen flex items-center justify-center">
+    <div className="h-screen dark:bg-neutral-950 bg-neutral-200 w-screen flex items-center justify-center">
       <div className="max-w-8xl mx-auto flex items-center flex-col gap-y-4 justify-center">
-        <Input value={value} onChange={(e) => setValue(e.target.value)} />
+        <Input
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          className="border border-neutral-700 dark:border-neutral-200"
+        />
         <Button
-          className="bg-neutral-800"
           disabled={createProject.isPending}
           onClick={() => createProject.mutate({ value: value })}
         >
