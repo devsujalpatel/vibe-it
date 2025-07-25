@@ -25,7 +25,7 @@ export const MessagesContainer = ({ projectId }: Props) => {
           fragment={message.fragment}
           createdAt={message.createdAt}
           isActiveFragment={false}
-          onFragment={() => {}}
+          onFragmentClick={() => {}}
           type={message.type}
           />
         ))}
