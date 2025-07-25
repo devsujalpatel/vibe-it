@@ -1,3 +1,4 @@
+// eslint.config.js or eslint.config.mjs
 import { dirname } from "path"
 import { fileURLToPath } from "url"
 import { FlatCompat } from "@eslint/eslintrc"
@@ -10,22 +11,25 @@ const compat = new FlatCompat({
 })
 
 const eslintConfig = [
-  // Your base config
+  // ✅ Extend recommended Next.js and TypeScript rules
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 
-  // ❌ Ignore Prisma generated files
+  // ✅ Ignore all generated Prisma files completely
   {
-    files: ["src/generated/prisma/**"],
+    ignores: ["src/generated/prisma/**"],
+  },
+
+  // ✅ Optional: If you want to lint Prisma files but disable specific rules instead of ignoring
+  {
+    files: ["src/generated/prisma/**/*.{ts,js}"],
     rules: {
-      // Disable all rules for generated files
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/no-require-imports": "off",
-    },
-    languageOptions: {
-      parserOptions: {
-        // Let ESLint know it's JavaScript
-        sourceType: "module",
-      },
+      "@typescript-eslint/no-empty-object-type": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unnecessary-type-constraint": "off",
+      "@typescript-eslint/no-wrapper-object-types": "off",
+      "@typescript-eslint/no-unsafe-function-type": "off",
     },
   },
 ]
