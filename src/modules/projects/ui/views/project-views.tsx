@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense, useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import {
   ResizableHandle,
@@ -12,6 +13,10 @@ import { MessagesContainer } from "../components/messages-container";
 import { Fragment } from "@/generated/prisma";
 import { ProjectHeader } from "../components/project-header";
 import { FragmentWeb } from "../components/fragment-web";
+import { CodeIcon, CrownIcon, EyeIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { CodeView } from "@/components/code-view";
 
 interface Props {
   projectId: string;
@@ -19,6 +24,7 @@ interface Props {
 
 export const ProjectView = ({ projectId }: Props) => {
   const [activeFragment, setActiveFragment] = useState<Fragment | null>(null);
+  const [tabsState, setTabsState] = useState<"preview" | "code">("preview");
 
   return (
     <div className="h-screen">
@@ -41,7 +47,38 @@ export const ProjectView = ({ projectId }: Props) => {
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={365} minSize={50}>
-          {!!activeFragment && <FragmentWeb data={activeFragment} />}
+          <Tabs
+            className="h-full gap-y-0"
+            defaultValue="preview"
+            value={tabsState}
+            onValueChange={(value) => setTabsState(value as "preview" | "code")}
+          >
+            <div className="w-full flex items-center p-2  border-b gap-x-2">
+              <TabsList className="h-10 border  rounded-md">
+                <TabsTrigger value="preview" className="rounded-md p-4">
+                  <EyeIcon />
+                  <span>Demo</span>
+                </TabsTrigger>
+                <TabsTrigger value="code" className="rounded-md p-4">
+                  <CodeIcon />
+                  <span>Code</span>
+                </TabsTrigger>
+              </TabsList>
+              <div className="ml-auto flex items-center gap-x-2">
+                <Button asChild size={"sm"} variant={"default"}>
+                  <Link href={"/pricing"}>
+                    <CrownIcon /> Upgrade
+                  </Link>
+                </Button>
+              </div>
+            </div>
+            <TabsContent value="preview">
+              {!!activeFragment && <FragmentWeb data={activeFragment} />}
+            </TabsContent>
+            <TabsContent value="code">
+              <CodeView code="const a = 'Hello ji'" lang="ts" />
+            </TabsContent>
+          </Tabs>
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>
