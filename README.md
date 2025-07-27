@@ -1,94 +1,102 @@
-# vibe-it 💻✨
+<img width="866" height="288" alt="vibeit" src="https://github.com/user-attachments/assets/6c0cfc8f-b735-430f-a852-be6503252914" />
 
-**vibe-it** is a modern web application designed to help developers create and showcase coding projects with style and ease. Built using [Next.js](https://nextjs.org/), it offers a sleek interface to organize, manage, and present your coding vibes — from small utilities to full-scale applications.
-
-> 🚀 Whether you're a solo developer, student, or open-source enthusiast — vibe-it helps you show off your work like a pro.
-
----
+**vibeit** is a sleek and modern web app built with [Next.js](https://nextjs.org/) that helps developers beautifully showcase their coding projects — from quick scripts to full-fledged apps.
 
 ## 🔥 Features
 
-- 🧠 Create and manage coding project entries
-- 🖼️ Add thumbnails, descriptions, and tags
-- 🔗 Include GitHub, Live Demo, and Tech Stack links
-- 📋 Organized dashboard to view and edit projects
-- 📱 Responsive design for all screen sizes
-- 🌐 Optimized for SEO and sharing
+- 🧠 Add and manage your coding projects
+- 🖼️ Upload thumbnails, descriptions, and tags
+- 🔗 Link GitHub, Live Demo, and Tech Stack
+- 📋 Clean, organized dashboard for project editing
+- 📱 Fully responsive across all devices
+- 🌐 SEO-optimized for better reach and sharing
 - 🔐 Optional user authentication
-
----
 
 ## ⚙️ Tech Stack
 
-| Tech           | Description                                  |
-|----------------|----------------------------------------------|
-| Next.js        | Fullstack React framework                    |
-| Tailwind CSS   | Utility-first styling                        |
-| TypeScript     | Type safety for scalable code                |
-| Auth.js        | Simple, secure authentication (optional)     |
-| Prisma         | ORM for PostgreSQL/MySQL (optional)          |
-| Vercel         | Seamless deployment + custom domain support  |
-| ShadCN UI      | Prebuilt UI components (optional)            |
-
----
+| Tech           | Purpose                                     |
+| -------------- | ------------------------------------------- |
+| **Next.js**    | React framework for full-stack capabilities |
+| **Tailwind**   | Utility-first CSS styling                   |
+| **TypeScript** | Type-safe, scalable code                    |
+| **Clerk**      | Secure, pluggable authentication (optional) |
+| **Prisma**     | Type-safe ORM for DB (PostgreSQL/MySQL)     |
+| **Vercel**     | Instant deployment + custom domains         |
+| **ShadCN UI**  | Modern prebuilt UI components (optional)    |
 
 ## 📦 Getting Started
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/vibe-it.git
-cd vibe-it
+# 1. Clone the repo
+git clone https://github.com/yourusername/vibeit.git
+cd vibeit
 
-# Install dependencies
+# 2. Install dependencies
 bun install
 
-# Set up environment variables
+# 3. Set up environment variables
 cp .env.example .env.local
 
-# Run the development server
+# 4. Start the dev server
 npm run dev
-Then visit: http://localhost:3000
+
+# Visit: http://localhost:3000
 ```
+
+### 🔑 Sample `.env.local`
+
 ```bash
-🔑 Environment Variables
-Here's a sample .env.local:
+DATABASE_URL=
+NEXT_PUBLIC_APP_URL="http://localhost:3000/"
 
-DATABASE_URL=your_database_url
-NEXTAUTH_SECRET=your_auth_secret
-NEXTAUTH_URL=http://localhost:3000
-Edit it based on your DB and auth setup.
+AI,
+GEMINI_API_KEY=
+
+E2B,
+E2B_API_KEY=
+E2B_ACCESS_TOKEN=
+
+Clerk,
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/
+NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/
 ```
-🚀 Deployment
-Deployed seamlessly via Vercel:
 
-# Deploy with Vercel CLI (if installed)
-vercel
-🎯 Roadmap (optional ideas)
-💾 Save project data to a database (PostgreSQL, MongoDB)
+## 🛣️ Roadmap (Ideas & Improvements)
 
-🖼️ Image upload support
+- 💾 Database persistence for project data
+- 🖼️ Image upload support
+- 🤖 AI-powered project descriptions (OpenAI API)
+- 📊 Project analytics
+- 🧰 Filter/search by tech stack or tags
 
-🧠 AI-powered project descriptions (OpenAI API)
+## 🧑‍💻 Contributing
 
-📊 Project analytics
+Contributions are always welcome!
 
-🗂️ Filter by tech stack or tags
+```bash
+# 1. Fork the repo
 
-🧑‍💻 Contributing
-Contributions are welcome!
+# 2. Create a new branch
+git checkout -b feature/your-feature-name
 
-Fork the repository
+# 3. Make your changes
 
-Create a new branch: git checkout -b feature/awesome-feature
+# 4. Commit your work
+git commit -m 'Add: your feature'
 
-Commit changes: git commit -m 'Add awesome feature'
+# 5. Push and open a PR
+git push origin feature/your-feature-name
+```
 
-Push to the branch: git push origin feature/awesome-feature
+## 📄 License
 
-Open a Pull Request
+This project is open-source under the [MIT License](LICENSE).
 
-📄 License
-This project is open source and available under the MIT License.
+## ✨ Credits
 
-✨ Credits
-Made with ❤️ by Sujal Patel
+Made with ❤️ by [Sujal Patel](https://github.com/devsujalpatel)
