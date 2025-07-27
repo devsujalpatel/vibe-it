@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Fira_Code } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 
 import "./globals.css";
 import { TRPCReactProvider } from "@/trpc/client";
@@ -27,23 +28,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <TRPCReactProvider>
-      <html lang="en" suppressHydrationWarning>
-        <head>
-          <link rel="shortcut icon" href="/logo.svg" type="image/x-icon" />
-        </head>
-        <body className={`${inter.variable} ${firaCode.variable} antialiased`}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+    <ClerkProvider>
+      <TRPCReactProvider>
+        <html lang="en" suppressHydrationWarning>
+          <head>
+            <link rel="shortcut icon" href="/logo.svg" type="image/x-icon" />
+          </head>
+          <body
+            className={`${inter.variable} ${firaCode.variable} antialiased`}
           >
-            <Toaster />
-            {children}
-          </ThemeProvider>
-        </body>
-      </html>
-    </TRPCReactProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Toaster />
+              {children}
+            </ThemeProvider>
+          </body>
+        </html>
+      </TRPCReactProvider>
+    </ClerkProvider>
   );
 }
