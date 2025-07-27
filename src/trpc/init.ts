@@ -34,3 +34,4 @@ const isAuthed = t.middleware(({ next, ctx }) => {
 export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;
 export const baseProcedure = t.procedure;
+export const protectedProcedure = t.procedure.use(isAuthed);
