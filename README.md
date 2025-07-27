@@ -1,6 +1,6 @@
 <img width="1500" height="256" alt="vibeit" src="https://github.com/user-attachments/assets/ce3c1b19-10a8-4d43-bacc-68f0217b4108" />
 
-**vibeit** is a sleek and modern web app built with [Next.js](https://nextjs.org/) that helps developers beautifully showcase their coding projects — from quick scripts to full-fledged apps.
+<p align="center"><strong>vibeit</strong> is a sleek, modern web app built with <a href="https://nextjs.org/">Next.js</a>. It helps developers beautifully showcase their coding projects — from quick scripts to full-fledged applications.</p>
 
 ## 🔥 Features
 
