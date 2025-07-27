@@ -27,7 +27,7 @@ export const ProjectView = ({ projectId }: Props) => {
   const [tabsState, setTabsState] = useState<"preview" | "code">("preview");
 
   return (
-    <div className="h-screen">
+    <div className="h-screen" suppressHydrationWarning>
       <ResizablePanelGroup direction="horizontal">
         <ResizablePanel
           defaultSize={35}
@@ -45,7 +45,7 @@ export const ProjectView = ({ projectId }: Props) => {
             />
           </Suspense>
         </ResizablePanel>
-        <ResizableHandle withHandle />
+        <ResizableHandle withHandle  />
         <ResizablePanel defaultSize={365} minSize={50}>
           <Tabs
             className="h-full gap-y-0"
