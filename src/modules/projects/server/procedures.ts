@@ -4,6 +4,7 @@ import { generateSlug } from "random-word-slugs";
 import { inngest } from "@/inngest/client";
 import { prisma } from "@/lib/db";
 import { protectedProcedure, createTRPCRouter } from "@/trpc/init";
+import { consumeCredits } from "@/lib/usage";
 import { TRPCError } from "@trpc/server";
 
 export const projectsRouter = createTRPCRouter({
@@ -49,6 +50,22 @@ export const projectsRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ input, ctx }) => {
+      try {
+        await consumeCredits();
+      } catch (error) {
+        if (error instanceof Error) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "Something went wrong",
+          });
+        } else {
+          throw new TRPCError({
+            code: "TOO_MANY_REQUESTS",
+            message: "You have reached your limit",
+          });
+        }
+      }
+
       const createdProject = await prisma.project.create({
         data: {
           userId: ctx.auth.userId,
