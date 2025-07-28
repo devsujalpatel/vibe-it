@@ -4,8 +4,8 @@ import Image from "next/image";
 
 const Page = () => {
   return (
-    <div className="flex flex-col max-w-5xl mx-auto w-full">
-      <section className="space-y-6 py-[16vh] 2xl:py-48">
+    <div className="flex flex-col max-w-5xl mx-auto w-full h-full">
+      <section className="space-y-6 py-[16vh] 2xl:py-56">
         <div className="flex flex-col items-center">
           <Image
             src="/logo.svg"
