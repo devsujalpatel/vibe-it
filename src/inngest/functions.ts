@@ -43,7 +43,7 @@ export const codeAgentFunction = inngest.createFunction(
           projectId: event.data.projectId,
         },
         orderBy: {
-          createdAt: "desc", 
+          createdAt: "desc",
         },
         take: 10,
       });
@@ -73,8 +73,8 @@ export const codeAgentFunction = inngest.createFunction(
       system: PROMPT,
       model: gemini({
         // model: "gemini-2.0-flash-lite",
-        model: "gemini-2.0-flash",
-        // model: "gemini-2.5-pro",
+        // model: "gemini-2.0-flash",
+        model: "gemini-2.5-pro",
       }),
 
       tools: [
