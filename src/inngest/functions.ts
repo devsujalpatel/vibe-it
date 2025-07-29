@@ -9,10 +9,15 @@ import {
   createState,
 } from "@inngest/agent-kit";
 import { inngest } from "./client";
-import { getSandbox, lastAssistantTextMessageContent, parseAgentOutput } from "@/inngest/utils";
+import {
+  getSandbox,
+  lastAssistantTextMessageContent,
+  parseAgentOutput,
+} from "@/inngest/utils";
 import { z } from "zod";
 import { FRAGMENT_TITLE_PROMPT, PROMPT, RESPONSE_PROMPT } from "@/prompt";
 import { prisma } from "@/lib/db";
+import { SANDBOX_TIMEOUT } from "@/types";
 
 interface AgentState {
   summary: string;
@@ -21,13 +26,13 @@ interface AgentState {
   };
 }
 
-
 export const codeAgentFunction = inngest.createFunction(
   { id: "code-agent" },
   { event: "code-agent/run" },
   async ({ event, step }) => {
     const sandboxId = await step.run("get-sandbox-id", async () => {
       const sandbox = await Sandbox.create("vibeit-nextjs");
+      await sandbox.setTimeout(SANDBOX_TIMEOUT);
       return sandbox.sandboxId;
     });
 
@@ -38,8 +43,9 @@ export const codeAgentFunction = inngest.createFunction(
           projectId: event.data.projectId,
         },
         orderBy: {
-          createdAt: "desc", // change to "asc" if ai does not understant context
+          createdAt: "desc", 
         },
+        take: 10,
       });
       for (const message of messages) {
         formattedMessages.push({
@@ -48,7 +54,7 @@ export const codeAgentFunction = inngest.createFunction(
           content: message.content,
         });
       }
-      return formattedMessages;
+      return formattedMessages.reverse();
     });
 
     const state = createState<AgentState>(
