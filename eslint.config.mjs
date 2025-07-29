@@ -16,7 +16,7 @@ const eslintConfig = [
 
   // ✅ Ignore all generated Prisma files completely
   {
-    ignores: ["src/generated/prisma/**"],
+    ignores: ["src/generated/prisma/*"],
   },
 
   // ✅ Optional: If you want to lint Prisma files but disable specific rules instead of ignoring
