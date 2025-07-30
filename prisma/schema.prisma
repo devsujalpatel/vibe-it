@@ -62,8 +62,14 @@ model Fragment {
 }
 
 
+model Transaction {
+  transactionId String @id
+  orderId String 
+  
+}
+
 model Usage {
   key String @id
   points Int
-  expire DateTime?
+  
 }
